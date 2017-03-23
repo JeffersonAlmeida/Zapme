@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "740058750468",
+    "firebase_url": "https://zapme-f307d.firebaseio.com",
+    "project_id": "zapme-f307d",
+    "storage_bucket": "zapme-f307d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740058750468:android:2d3c4442c81ac190",
+        "android_client_info": {
+          "package_name": "com.zapme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740058750468-3qdbsqgvhun6sj9jvlf8es3vjra8fnap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapme",
+            "certificate_hash": "42bb8493f839f66b02dfeddb74f239212b327613"
+          }
+        },
+        {
+          "client_id": "740058750468-h3edtncqjqjheqsc03j7vguunr1981ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApY8e6sz5amDqI0JuUJ9vRiUvs_dTXDjU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740058750468-h3edtncqjqjheqsc03j7vguunr1981ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

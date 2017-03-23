@@ -11,14 +11,17 @@ public class Contact {
     private String shortDescription;
     private String imageUrl;
 
-    public Contact(String name) {
-        this.name = name;
+    public Contact() {
     }
 
-    public Contact(String name, String shortDescription, String imageUrl) {
+    public Contact(String number, String name, String shortDescription) {
+        this.number = number;
         this.name = name;
         this.shortDescription = shortDescription;
-        this.imageUrl = imageUrl;
+    }
+
+    public Contact(String firstName) {
+        this.name = firstName;
     }
 
     public String getName() {
