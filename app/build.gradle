@@ -11,6 +11,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "com.zapme.ZapmeRunner"
     }
     buildTypes {
@@ -24,6 +25,10 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
+}
+
+configurations {
+    all*.exclude group: 'org.hamcrest', module: 'hamcrest-core'
 }
 
 dependencies {
@@ -85,6 +90,16 @@ dependencies {
     // Mockito
 
     compile group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
+
+    // Glide
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+
+    // Multidex
+
+    compile 'com.android.support:multidex:1.0.1'
 
 
 }

@@ -13,7 +13,7 @@ import rx.Observable;
 
 public interface Service {
 
-    @GET("photographer/list")
+    @GET("list")
     Observable<List<Contact>> getContactstList();
 
 }

@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class RestApiModule {
 
-    private static final String BASE_URL = "http://private-a9960-jeffersonalmeida.apiary-mock.com/";
+    private static final String BASE_URL = "http://private-27805-zapme.apiary-mock.com/";
 
     @Provides
     @Singleton
