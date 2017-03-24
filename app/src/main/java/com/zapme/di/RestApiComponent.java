@@ -1,5 +1,6 @@
 package com.zapme.di;
 
+import com.zapme.create.view.CreateContactActivity;
 import com.zapme.list.view.ContactsListActivity;
 
 import javax.inject.Singleton;
@@ -15,5 +16,7 @@ import dagger.Component;
 public interface RestApiComponent {
 
     void inject(ContactsListActivity contactsListActivity);
+
+    void inject(CreateContactActivity createContactActivity);
 
 }

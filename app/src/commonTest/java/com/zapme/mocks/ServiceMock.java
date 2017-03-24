@@ -1,8 +1,8 @@
 package com.zapme.mocks;
 
+import com.zapme.FabricForTests;
 import com.zapme.Service;
 import com.zapme.model.Contact;
-import com.zapme.util.FabricForTests;
 
 import java.util.List;
 
@@ -18,6 +18,11 @@ public class ServiceMock implements Service {
     public Observable<List<Contact>> getContactstList() {
         return Observable
                 .just(FabricForTests.getContactsListFromJson());
+    }
+
+    @Override
+    public Observable<Contact> saveContact(Contact contact) {
+        return Observable.just(new Contact());
     }
 
 }

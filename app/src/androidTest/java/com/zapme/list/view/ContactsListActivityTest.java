@@ -2,9 +2,13 @@ package com.zapme.list.view;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.zapme.R;
 import com.zapme.Service;
 import com.zapme.ZapmeApplication;
 import com.zapme.di.TestRestApiComponent;
@@ -47,6 +51,12 @@ public class ContactsListActivityTest {
     public void showContactsList() throws Exception {
         contactsListActivity.launchActivity(new Intent());
         Thread.sleep(3000);
+
+        Espresso.onView(ViewMatchers.withId(R.id.teste))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withId(R.id.teste))
+                .check(ViewAssertions.matches(ViewMatchers.withText("teste")));
     }
 
 //    @Test

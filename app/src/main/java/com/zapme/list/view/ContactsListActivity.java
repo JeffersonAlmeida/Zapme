@@ -1,21 +1,19 @@
 package com.zapme.list.view;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.PhoneNumberUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.zapme.R;
 import com.zapme.ZapmeApplication;
+import com.zapme.create.view.CreateContactActivity;
 import com.zapme.list.adapter.ContactsAdapter;
 import com.zapme.list.presenter.ContactsListPresenter;
 import com.zapme.model.Contact;
@@ -28,7 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.zapme.util.RecyclerItemClickListener.*;
+import static com.zapme.util.RecyclerItemClickListener.OnItemClickListener;
 
 public class ContactsListActivity
         extends AppCompatActivity implements ContactsListView {
@@ -38,6 +36,8 @@ public class ContactsListActivity
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
+
+    FloatingActionButton floatingActionButton;
 
     @Inject
     ContactsListPresenter contactsListPresenter;
@@ -72,6 +72,16 @@ public class ContactsListActivity
                 openWhatsApp(contact.getNumber());
             }
         }));
+
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ContactsListActivity.this, "teste", Toast.LENGTH_SHORT).show();
+                CreateContactActivity.start(ContactsListActivity.this);
+            }
+        });
 
         contactsListPresenter.attachView(this);
         contactsListPresenter.loadContacts();

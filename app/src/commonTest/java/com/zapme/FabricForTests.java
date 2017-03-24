@@ -1,4 +1,4 @@
-package com.zapme.util;
+package com.zapme;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,5 +43,14 @@ public class FabricForTests {
 
         return contactList;
     }
+
+    public static Contact getFirstContactFromJson(){
+
+        Type listType = new TypeToken<ArrayList<Contact>>(){}.getType();
+        List<Contact> contactList = new Gson().fromJson(jsonTwoContacts, listType);
+
+        return contactList.get(0);
+    }
+
 
 }
