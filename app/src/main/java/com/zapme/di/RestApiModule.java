@@ -23,7 +23,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class RestApiModule {
 
-    private static final String BASE_URL = "http://private-27805-zapme.apiary-mock.com/";
+//    private static final String BASE_URL = "http://private-27805-zapme.apiary-mock.com/";
+
+    private static final String BASE_URL = "https://zapme-f307d.firebaseio.com";
+
+    // https://zapme-f307d.firebaseio.com/
 
     @Provides
     @Singleton

@@ -20,12 +20,6 @@
         android:src="@android:drawable/ic_input_add"
         />
 
-    <TextView
-        android:id="@+id/teste"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="teste"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
