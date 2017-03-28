@@ -119,6 +119,14 @@ dependencies {
 
     compile 'com.android.support:support-v4:25.3.0'
 
+    // Firebase
+
+    compile 'com.google.firebase:firebase-database:10.2.0'
+
+    // FirebaseUI Database only
+    compile 'com.firebaseui:firebase-ui-database:1.2.0'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
