@@ -14,7 +14,7 @@ import rx.Observable;
 
 public interface Service {
 
-    @GET("list")
+    @GET("/")
     Observable<List<Contact>> getContactstList();
 
     @PUT("save")

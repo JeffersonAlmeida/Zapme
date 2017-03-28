@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.google.firebase.FirebaseApp;
 import com.zapme.di.DaggerRestApiComponent;
 import com.zapme.di.RestApiComponent;
 import com.zapme.di.RestApiModule;
@@ -25,6 +26,8 @@ public class ZapmeApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        FirebaseApp.initializeApp(this);
 
         restApiComponent = DaggerRestApiComponent
                 .builder()

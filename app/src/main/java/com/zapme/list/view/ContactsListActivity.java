@@ -11,11 +11,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.zapme.R;
 import com.zapme.ZapmeApplication;
 import com.zapme.create.view.CreateContactActivity;
-import com.zapme.list.adapter.ContactsAdapter;
 import com.zapme.list.presenter.ContactsListPresenter;
+import com.zapme.list.viewholder.ContactViewHolder;
 import com.zapme.model.Contact;
 import com.zapme.util.RecyclerItemClickListener;
 
@@ -25,11 +29,14 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static com.zapme.util.RecyclerItemClickListener.OnItemClickListener;
 
 public class ContactsListActivity
         extends AppCompatActivity implements ContactsListView {
+
+    private static final String CONTACTS = "contacts";
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -42,8 +49,7 @@ public class ContactsListActivity
     @Inject
     ContactsListPresenter contactsListPresenter;
 
-    @Inject
-    ContactsAdapter mAdapter;
+    FirebaseRecyclerAdapter<Contact, ContactViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +61,60 @@ public class ContactsListActivity
 
         ButterKnife.bind(this);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new ContactsAdapter();
-        mRecyclerView.setAdapter(mAdapter);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        DatabaseReference reference = firebaseDatabase.getReference(CONTACTS);
+
+        adapter =
+                new FirebaseRecyclerAdapter<Contact, ContactViewHolder>(Contact.class,
+                        R.layout.activity_list_item, ContactViewHolder.class, reference) {
+
+                    @Override
+                    protected void populateViewHolder(final ContactViewHolder holder,
+                                                      Contact contact, int position) {
+
+                        String description = contact.getShortDescription();
+                        holder.getShortDescription().setText(description);
+
+                        String imageUrl = contact.getImageUrl();
+
+                        Glide
+                                .with(ContactsListActivity.this)
+                                .load(imageUrl)
+                                .centerCrop()
+                                .bitmapTransform(new CropCircleTransformation(ContactsListActivity.this))
+                                .crossFade()
+                                .into(holder.getImageView());
+
+                        final String name = contact.getName();
+                        holder.getTitle().setText(name);
+
+                        final String number = contact.getNumber();
+                        holder.getNumber().setText(number);
+
+                        progressBar.setVisibility(View.GONE);
+
+                        holder.getView().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                openWhatsApp(number);
+                            }
+                        });
+                    }
+                };
+
+        progressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setAdapter(adapter);
 
         mRecyclerView.addOnItemTouchListener( new RecyclerItemClickListener(this, new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Contact contact = mAdapter.getList().get(position);
-                openWhatsApp(contact.getNumber());
+
             }
         }));
 
@@ -78,13 +123,9 @@ public class ContactsListActivity
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ContactsListActivity.this, "teste", Toast.LENGTH_SHORT).show();
                 CreateContactActivity.start(ContactsListActivity.this);
             }
         });
-
-        contactsListPresenter.attachView(this);
-        contactsListPresenter.loadContacts();
 
     }
 
@@ -97,7 +138,6 @@ public class ContactsListActivity
 
     @Override
     public void showContactsList(List<Contact> contactList) {
-        mAdapter.setList(contactList);
     }
 
     @Override

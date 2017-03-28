@@ -20,12 +20,6 @@
         android:src="@android:drawable/ic_input_add"
         />
 
-    <TextView
-        android:id="@+id/teste"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="teste"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,6 +27,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/progressBar" />
